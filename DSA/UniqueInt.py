@@ -1,14 +1,25 @@
 class UniqueIntegerProcessor:
     def __init__(self, input_filename, output_filename):
+
+        """
+        Initializes the UniqueIntegerProcessor with input and output file names.
+        
+        Args:
+            input_filename (str): The name of the input file to read integers from.
+            output_filename (str): The name of the output file to write unique integers to.
+        """
+
         self.input_filename = input_filename
         self.output_filename = output_filename
         self.unique_integers = []
 
     def is_integer(self, s):
-        """Check if the string is a valid integer."""
-        if s.startswith('-'):
-            return s[1:].isdigit()
-        return s.isdigit()
+        """Check if the string is a valid 32-bit signed integer."""
+        try:
+            number = int(s)
+            return -2147483648 <= number <= 2147483647  # Check 32-bit range
+        except ValueError:
+            return False
 
     def insert_sorted(self, number):
         """Insert a number into the sorted list of unique integers."""
@@ -38,7 +49,7 @@ class UniqueIntegerProcessor:
                 number = int(parts[0])  # Convert to integer
                 self.insert_sorted(number)  # Insert while maintaining order
 
-        # Write the unique sorted integers to the output file
+        # Writing the unique sorted integers to the output file
         self.write_output()
 
     def write_output(self):
@@ -48,7 +59,7 @@ class UniqueIntegerProcessor:
                 outfile.write(f"{number}\n")
 
 
-# Example usage with specified input and output files
+# Usage with specified input and output files
 input_filename = 'sample_01.txt'  # Input file name
 output_filename = 'sample_02.txt'  # Output file name
 processor = UniqueIntegerProcessor(input_filename, output_filename)
