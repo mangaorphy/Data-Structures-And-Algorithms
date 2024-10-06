@@ -91,15 +91,6 @@ def main():
     print("3. Multiplication")
     choice = input("Enter choice (1/2/3): ")
 
-    matrix1_path = input("Enter path for first matrix: ")
-    matrix2_path = input("Enter path for second matrix: ")
-    output_path = input("Enter path for output file: ")  # New input for output file path
-
-    matrix1 = SparseMatrix(matrix1_path)
-    matrix2 = SparseMatrix(matrix2_path)
-
-    result = None
-
     if choice == '1':
         result = matrix1.add(matrix2)
     elif choice == '2':
@@ -109,6 +100,17 @@ def main():
     else:
         print("Invalid choice")
         return
+
+    matrix1_path = input("Enter path for first matrix: ")
+    matrix2_path = input("Enter path for second matrix: ")
+    output_path = input("Enter path for output file: ")  # New input for output file path
+
+    matrix1 = SparseMatrix(matrix1_path)
+    matrix2 = SparseMatrix(matrix2_path)
+
+    result = None
+
+    
 
     # Write result to output file
     with open(output_path, 'w') as f:
