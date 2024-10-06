@@ -6,8 +6,6 @@ class SparseMatrix:
 
         if matrix_file_path:
             self.load_from_file(matrix_file_path)
-        else:
-            self.data = {}
 
     def load_from_file(self, file_path):
         try:
@@ -86,7 +84,7 @@ class SparseMatrix:
 
 def main():
     import sys
-    
+
     print("Select an operation:")
     print("1. Addition")
     print("2. Subtraction")
@@ -95,6 +93,7 @@ def main():
 
     matrix1_path = input("Enter path for first matrix: ")
     matrix2_path = input("Enter path for second matrix: ")
+    output_path = input("Enter path for output file: ")  # New input for output file path
 
     matrix1 = SparseMatrix(matrix1_path)
     matrix2 = SparseMatrix(matrix2_path)
@@ -111,10 +110,12 @@ def main():
         print("Invalid choice")
         return
 
-    # Print result
-    print("Result Sparse Matrix:")
-    for (row, col), value in result.data.items():
-        print(f"({row}, {col}, {value})")
+    # Write result to output file
+    with open(output_path, 'w') as f:
+        for (row, col), value in result.data.items():
+            f.write(f"({row}, {col}, {value})\n")
+
+    print(f"Result written to {output_path}")
 
 if __name__ == "__main__":
     main()
